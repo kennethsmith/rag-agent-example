@@ -1,0 +1,27 @@
+# LangChain Ecosystem
+langchain>=0.1.0
+langchain-core>=0.1.0
+langchain-community>=0.0.1
+langchain-ollama>=0.0.1
+langchain-openai>=0.0.1
+langchain-tavily>=0.0.1
+langchain-nomic>=0.0.1
+langgraph>=0.0.1
+
+# Vector Store
+chromadb>=0.4.0
+
+# Embeddings and Local Models
+gpt4all>=2.0.0
+
+# LangSmith (for prompt hub access)
+langsmith>=0.0.1
+
+# Text Processing
+tiktoken>=0.5.0
+
+# Optional: Visualization (for draw.py)
+ipython>=8.0.0
+
+# For WebBaseLoader in ./artifacts/pull.py in posts()
+bs4>=0.0.2

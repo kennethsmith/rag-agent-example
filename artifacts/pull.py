@@ -1,5 +1,3 @@
-# install langchain langsmith
-import os
 import file_paths as fp
 import pickle
 from pathlib import Path 
@@ -32,7 +30,7 @@ def prompts():
     
     prompt = Client(
         # api_key=os.getenv("LANGSMITH_API_KEY") or "<LANGSMITH_API_KEY>"
-    ).pull_prompt("rlm/rag-prompt")
+    ).pull_prompt("rlm/rag-prompt", dangerously_pull_public_prompt=True)
     Path(fp.prompts_dir).expanduser().mkdir(parents=True, exist_ok=True)
     with open(Path(fp.prompts_path).expanduser(), 'wb') as f:
         pickle.dump(prompt, f)
