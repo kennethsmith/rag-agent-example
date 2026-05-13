@@ -23,5 +23,5 @@ tiktoken>=0.5.0
 # Optional: Visualization (for draw.py)
 ipython>=8.0.0
 
-# For WebBaseLoader in ./artifacts/pull.py in posts()
+# For WebBaseLoader in posts() in ./artifacts/pull.py
 bs4>=0.0.2

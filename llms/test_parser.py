@@ -1,6 +1,6 @@
 import get as get_llms
 from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
+from langchain_core.output_parsers import StrOutputParser
 
 def prompt():
     return PromptTemplate(
@@ -25,28 +25,14 @@ def prompt_args():
         "generation": "Cabins are yellow."
     }
 
-def test_json_parser():
-    grader = prompt() | get_llms.llm() | JsonOutputParser()
-    grade = grader.invoke(prompt_args())
-    print(grade)
-    print(grade["score"])
-
 def test_str_parser():
     grader = prompt() | get_llms.llm() | StrOutputParser()
     grade = grader.invoke(prompt_args())
     print(grade)
     print(grade[0])
 
-def test_json_parser_lm_studio():
-    grader = prompt() | get_llms.lm_studio() | JsonOutputParser()
-    grade = grader.invoke(prompt_args())
-    print(grade)
-    print(grade["score"])
-
 def main():
-    test_json_parser()
     test_str_parser()
-    test_json_parser_lm_studio()
 
 if __name__ == "__main__":
     main()

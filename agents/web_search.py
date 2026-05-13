@@ -23,18 +23,20 @@ def web_search(state):
     )
 
     # Web search
-    web_results = ""
+    web_results = []
     docs = tool.invoke({"query": question})
     if("error" in docs):
         print(docs)
 
     elif("results" in docs):
-        web_results = "\n".join([d["content"] for d in docs["results"]])
-        web_results = Document(page_content=web_results)
-        print(docs)
-        print(web_results)
+        #web_results = "\n".join([d["content"] for d in docs["results"]])
+        #web_results = Document(page_content=web_results)
+        for d in docs["results"]:
+            web_results.append([d["content"] ])
+        #print(docs)
+        #print(web_results)
 
-    return {"documents": web_results, "question": question}
+    return {"web_documents": web_results}
 
 def main():
     web_search({"question": "Tell me about memory usage for RAG models?"})

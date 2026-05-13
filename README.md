@@ -28,6 +28,7 @@ python draw.py
 .venv/lib/python3.14/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
   from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
 ```
+- Image(app.get_graph().draw_mermaid_png()) in ./draw.py is currently failing with a 400 API call, so diagram.png is out of date.
 
 ## Environment Variables
 - TAVILY_API_KEY - For web search (errors gracefully without)
@@ -47,3 +48,14 @@ In order for the web search (./agents/web_search.py) flow to work, you'll need t
     TAVILY_API_KEY
 
 Running the ./draw.py will create a diagram of the graph (./diagram.png).
+
+## TODO
+- Fix the `.venv/lib/python3.14/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.` error.
+- Add tests.
+- Add an LLM Memory and Random web search result to the assets.
+- Explore options to fix the diagram generation.
+- Add the more complex use case of looping back through the generation (ideas):
+    - Add the web searches to the vector store.
+    - Rewrite the question again.
+    - Use the hallucination and answer grade feedback to inform a new generation.
+- Experiment with coding agents on the codebase.

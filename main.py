@@ -1,21 +1,27 @@
 import time
 from pprint import pprint
+from llms import get as llm_get
+from artifacts import get as a
+import vector.store as vs
 import graph.graph_build as graph_build
 
 def graph(question):
+    llm = llm_get.llm()
+    docs = a.posts()
     app = graph_build.build()
+    retriever = vs.index(docs)
     
-    inputs = {"question": question}
+    inputs = {"question": question, "llm": llm, "retriever": retriever}
+    outputs = {}
     for output in app.stream(inputs):
         for key, value in output.items():
-            # Node
-            pprint(f"Node '{key}':")
-            # Optional: print full state at each node
-            pprint(value, indent=2, width=80, depth=None)
-        pprint("\n---\n")
-
-    # Final generation
-    pprint(value["generation"])
+            outputs[key] = value
+    pprint(outputs.keys())
+    pprint("Here is what I generated:")
+    pprint(outputs['end']['generation'])
+    print("\n")
+    print("Should you trust it? ", outputs['end']['hallucination_grade']['grade'])
+    print("Is it a good answer? ", outputs['end']['answer_grade']['grade'])
 
 def main():
     # Seed the question
@@ -27,7 +33,6 @@ def main():
     graph_end_time = time.perf_counter()
 
     print(f"Graph lapsed time: {graph_end_time - graph_start_time:.4f} seconds")
-
 
 if __name__ == "__main__":
     main()
